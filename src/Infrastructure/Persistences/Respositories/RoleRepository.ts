@@ -49,5 +49,4 @@ export default class RoleRepository extends BaseRepository<typeof Role> implemen
             throw new Error("Error at getRoleByName in RoleRepository: " + error.message);
         }
     }
-
 }

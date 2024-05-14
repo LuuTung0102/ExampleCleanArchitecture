@@ -11,7 +11,6 @@ import { hashPassword } from "../../../Application/Common/Helpers/passwordUtils"
 //     super(collectionName);
 //   }
 class UserRepository implements IUserRepository {
-
   async updateUserById(userId: string, userData: any, session: ClientSession) {
     try {
       const _id = new mongoose.Types.ObjectId(userId);

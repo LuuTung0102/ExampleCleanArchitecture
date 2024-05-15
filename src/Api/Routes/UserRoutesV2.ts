@@ -15,6 +15,9 @@ const router = express.Router();
 
 const userController = new UserController();
 
-router.get("/", userController.index);
+router.post("/create", userController.CreateUser);
+router.get("/:id", userController.ReadUserById);
+router.patch("/update", userController.UpdateUserById);
+router.delete("/delete", userController.DeleteUserById);
 
 module.exports = router;

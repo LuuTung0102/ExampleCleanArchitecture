@@ -7,7 +7,6 @@ import { StatusCodeEnums } from '../../../../Domain/Enums/StatusCodeEnums';
 import { IUnitOfWork } from '../../../Persistences/IRepositories/IUnitOfWork';
 
 
-
 export async function CreateUserHandler(data: any): Promise<CreateUserResponse|CoreException> {
   const unitOfWork: IUnitOfWork = new UnitOfWork();
   try {

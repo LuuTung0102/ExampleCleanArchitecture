@@ -1,11 +1,12 @@
 import { ClientSession } from 'mongoose';
-import { UserWithBase } from '../../../Domain/Entities/UserEntitesV2';
+
+import { UserWithBaseV2 } from '../../../Domain/Entities/UserEntitesV2';
 
 interface IUserRepositoryV2 {
-	createUser(userData: any, session: ClientSession): Promise<typeof UserWithBase>;
-	getUserById(userId: string, queryData: any): Promise<typeof UserWithBase>;
-	updateUserById(userId: string, userData: any, session: ClientSession);
-	deleteUserById(userId: string, session: ClientSession);
+	createUser(userData: any, session: ClientSession): Promise<typeof UserWithBaseV2>;
+	getUserById(userId: string): Promise<typeof UserWithBaseV2>;
+	updateUserById(queryData: any, session: ClientSession);
+	deleteUserById(queryData: any, session: ClientSession);
 }
 
 export default IUserRepositoryV2;

@@ -133,7 +133,6 @@ class UserRepository implements IUserRepository {
     }
   }
 
-
   async changePasswordUser(queryData: any, session: ClientSession): Promise<void> {
     try {
       const { userId, newPassword, isActive, isDelete } = queryData;

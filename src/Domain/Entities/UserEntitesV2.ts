@@ -43,4 +43,4 @@ const UserWithBaseSchema = new mongoose.Schema({
 	...BaseSchema.obj,
 });
 
-export const UserWithBase = mongoose.model('UserWithBase', UserWithBaseSchema, 'users');
+export const UserWithBaseV2 = mongoose.model('UserWithBaseV2', UserWithBaseSchema, 'users');

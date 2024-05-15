@@ -2,6 +2,7 @@ import {IUnitOfWork} from "../../../Persistences/IRepositories/IUnitOfWork";
 import {UnitOfWork} from "../../../../Infrastructure/Persistences/Respositories/UnitOfWork";
 import {CoreException} from "../../../Common/Exceptions/CoreException";
 import {StatusCodeEnums} from "../../../../Domain/Enums/StatusCodeEnums";
+import {FindStemResponse} from "../Response/FindStemResponse";
 
 export async function FindStemHandle(
     data: any
@@ -9,11 +10,23 @@ export async function FindStemHandle(
     const unitOfWork: IUnitOfWork = new UnitOfWork()
     try {
         const {stemId} = data
-        const session = unitOfWork.startTransaction()
+        const session = await unitOfWork.startTransaction()
 
-        const result = unitOfWork.stemRepository.getStemById(
+        const queryData = {
+            isDelete: false,
+        }
+
+        const result:any = await unitOfWork.stemRepository.getStemById(
             stemId,
-            session
+            queryData
+        )
+
+        // console.log("Result: ", result)
+
+        return new FindStemResponse(
+            "Success",
+            StatusCodeEnums.OK_200,
+            result
         )
 
     } catch (error: any) {

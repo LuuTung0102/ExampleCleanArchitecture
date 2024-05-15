@@ -3,6 +3,7 @@ import {CoreException} from "../../../Common/Exceptions/CoreException";
 import {IUnitOfWork} from "../../../Persistences/IRepositories/IUnitOfWork";
 import {UnitOfWork} from "../../../../Infrastructure/Persistences/Respositories/UnitOfWork";
 import {StatusCodeEnums} from "../../../../Domain/Enums/StatusCodeEnums";
+import {StemWithBase} from "../../../../Domain/Entities/StemEntites";
 
 export async function FindAllStemHandle(): Promise<FindAllStemResponse | CoreException> {
     const unitOfWork: IUnitOfWork = new UnitOfWork()
@@ -10,14 +11,20 @@ export async function FindAllStemHandle(): Promise<FindAllStemResponse | CoreExc
         const queryData = {
             isDelete: false,
         }
-        const result: any = await unitOfWork.stemRepository.getAllStem(
+        const result:typeof StemWithBase[] | null= await unitOfWork.stemRepository.getAllStem(
             queryData
         )
+
+        if (!result) {
+            return new CoreException(StatusCodeEnums.InternalServerError_500, "Stem is empty");
+        }
+
         return new FindAllStemResponse(
             "Success",
             StatusCodeEnums.OK_200,
-            result
+            result,
         )
+
     } catch (error: any) {
         await unitOfWork.abortTransaction()
         return new CoreException(

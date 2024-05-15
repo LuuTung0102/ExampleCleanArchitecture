@@ -32,7 +32,10 @@ export default class StemController {
                 buyDate,
                 xp
             } = req.body
-            const userId = (req as any).user.userId
+
+            //TODO: Fix UserId
+            //const userId = (req as any).user.userId
+            const userId = "123"
             const data = {
                 userId,
                 name,

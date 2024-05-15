@@ -60,7 +60,7 @@ class StemRepository implements IStemRepository {
 
     async getAllStem(queryData: any): Promise<typeof StemWithBase[] | null> {
         try {
-            const stems: any = StemWithBase.find({
+            const stems: typeof StemWithBase[] = await StemWithBase.find({
                 isDelete: queryData.isDelete
             });
             return stems;

@@ -2,6 +2,7 @@ import {IUnitOfWork} from "../../../Persistences/IRepositories/IUnitOfWork";
 import {UnitOfWork} from "../../../../Infrastructure/Persistences/Respositories/UnitOfWork";
 import {CoreException} from "../../../Common/Exceptions/CoreException";
 import {StatusCodeEnums} from "../../../../Domain/Enums/StatusCodeEnums";
+import {UpdateStemResponse} from "../Response/UpdateStemResponse";
 
 export async function UpdateStemHandle(
     data: any
@@ -41,10 +42,15 @@ export async function UpdateStemHandle(
             xp
         }
 
-        const result = unitOfWork.stemRepository.updateStemById(
+        const result: any = await unitOfWork.stemRepository.updateStemById(
             stemId,
             updateStemData,
             session
+        )
+        return new UpdateStemResponse(
+            "Sucess",
+            StatusCodeEnums.OK_200,
+            result
         )
     } catch (error: any) {
         await unitOfWork.abortTransaction()

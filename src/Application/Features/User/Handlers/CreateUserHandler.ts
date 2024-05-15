@@ -24,7 +24,7 @@ export async function CreateUserHandler(data: any): Promise<CreateUserResponse|C
       password: password,
       phoneNumber: phoneNumber,
       username: username,
-      role_id: role._id
+      // role_id: role._id
     };
     const result: any = await unitOfWork.userRepository.createUser(createUserRoleData, session);
     const emailHash = await md5Encrypt(result.emailCode);

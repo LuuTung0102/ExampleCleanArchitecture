@@ -90,7 +90,7 @@ class UserRepository implements IUserRepository {
         username: userData.username,
         password: hashedPassword,
         phoneNumber: userData.phoneNumber,
-        role_id: userData.role_id,
+        // role_id: userData.role_id,
       }], {session});
       
       return user[0];

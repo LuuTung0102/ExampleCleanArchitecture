@@ -9,12 +9,11 @@ declare global {
 	}
 }
 
-const { authenticateToken, authorizationMiddleware } = require('../Middlewares/AuthMiddleware');
-
 const router = express.Router();
 
 const userController = new UserController();
 
 router.get("/", userController.index);
+router.post("/signup", userController.createUser);
 
 module.exports = router;

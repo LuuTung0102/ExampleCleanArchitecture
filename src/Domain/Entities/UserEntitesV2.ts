@@ -8,20 +8,44 @@ const isValidObjectId = (value: Types.ObjectId) => {
 export const User = new mongoose.Schema({
 	fullname: String,
 	password: String,
-	imagePath: String,
-	total_xp: Number,
-	current_level_xp: Number,
-	xp_require_level_up: Number,
+	imagePath: {
+		type: String,
+		default: null
+	},
+	total_xp: {
+		type: Number,
+		default: 0
+	},
+	current_level_xp: {
+		type: Number,
+		default: 0
+	},
+	xp_require_level_up: {
+		type: Number,
+		default: 0
+	},
 	level_id: {
 		type: Types.ObjectId,
 		validate: {
 			validator: isValidObjectId,
 		},
 	},
-	current_level: Number,
-	next_level: Number,
-	total_system_own: Number,
-	total_money_spent: Number,
+	current_level: {
+		type: Number,
+		default: 0
+	},
+	next_level: {
+		type: Number,
+		default: 0
+	},
+	total_system_own: {
+		type: Number,
+		default: 0
+	},
+	total_money_spent: {
+		type: Number,
+		default: 0
+	},
 	stemId: {
 		type: Types.ObjectId,
 		validate: {
@@ -38,9 +62,9 @@ export const User = new mongoose.Schema({
 	}
 });
 
-const UserWithBaseSchema = new mongoose.Schema({
+const UserWithBaseSchemaV2 = new mongoose.Schema({
 	...User.obj,
 	...BaseSchema.obj,
 });
 
-export const UserWithBase = mongoose.model('UserWithBase', UserWithBaseSchema, 'users');
+export const UserWithBaseV2 = mongoose.model("UserWithBaseV2", UserWithBaseSchemaV2, "usersv2");

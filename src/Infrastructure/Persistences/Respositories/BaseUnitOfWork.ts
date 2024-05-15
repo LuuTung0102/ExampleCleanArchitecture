@@ -2,7 +2,7 @@ import mongoose, { ClientSession } from "mongoose";
 import { IBaseUnitOfWork } from "../../../Application/Persistences/IRepositories/IBaseUnitOfWork";
 require('dotenv').config();
 const URI = process.env.CONNECTION_STRING;
-const DBName = process.env.DATABASE_NAME
+const DBName = process.env.DATABASE_NAME;
 export class BaseUnitOfWork implements IBaseUnitOfWork {
     private session: ClientSession | null = null;
     constructor() {

@@ -1,3 +1,4 @@
+const db = require('./src/Infrastructure/Persistences/Config/DbConnection')
 const express = require('express');
 require('dotenv').config();
 const app = express();
@@ -7,6 +8,7 @@ const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger_output.json')
 
 const PORT = process.env.PORT;
+
 app.use(express.json());    
 
 app.use("/api", roleRoute);

@@ -4,7 +4,7 @@ import { UnitOfWork } from "../../../../Infrastructure/Persistences/Respositorie
 import { IUnitOfWork } from "../../../Persistences/IRepositories/IUnitOfWork";
 import { StatusCodeEnums } from "../../../../Domain/Enums/StatusCodeEnums";
 
-export async function GetLevelsHandler(): Promise<GetLevelsResponse|CoreException> {
+export async function GetLevelsHandler(page?: any, perPage?: any): Promise<GetLevelsResponse|CoreException> {
     const unitOfWork: IUnitOfWork = new UnitOfWork();
     try {
         await unitOfWork.startTransaction();
@@ -14,7 +14,9 @@ export async function GetLevelsHandler(): Promise<GetLevelsResponse|CoreExceptio
             isDelete: false,
         };
 
-        const result: any = await unitOfWork.levelRepository.getLevels(queryData);
+        const pagination = { page: page as number, perPage: perPage as number};
+
+        const result: any = await unitOfWork.levelRepository.getLevels(queryData, pagination);
 
         return new GetLevelsResponse('Get level list successful', StatusCodeEnums.OK_200, result);
     }   

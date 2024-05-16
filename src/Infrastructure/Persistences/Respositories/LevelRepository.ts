@@ -42,11 +42,14 @@ export default class LevelRepository implements ILevelRepository {
         }
     }
 
-    async getLevels(queryData: any): Promise<typeof LevelWithBase[] | null> {
+    async getLevels(queryData: any, pagination: any): Promise<typeof LevelWithBase[] | null> {
         try {
-            const showOptions = { _id: 1, level: 1, xp : 1, description: 1, iconPath: 1 };
+            const page: number = pagination?.page ||  1; 
+            const perPage: number = pagination?.perPage ||  10; 
+            const skip: number = perPage * page - perPage; // In first page, skip 0 index
+            const showOptions: any = { _id: 1, level: 1, xp : 1, description: 1, iconPath: 1 };
 
-            const levels: typeof LevelWithBase[] = await LevelWithBase.find(queryData).select(showOptions) //.sort({ name: 1 });
+            const levels: typeof LevelWithBase[] = await LevelWithBase.find(queryData, null, { limit: perPage, skip: skip }).select(showOptions); //.sort({ name: 1 });
 
             if (!levels) return null;
 

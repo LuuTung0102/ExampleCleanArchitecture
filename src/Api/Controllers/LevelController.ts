@@ -11,10 +11,16 @@ import { GetLevelByIdHandler } from '../../Application/Features/Level/Handlers/G
 export default class LevelController {
     async createLevel (req: Request<any, any, CreateLevelRequest>, res: Response): Promise<Response> {
         try {
-            const { level, xp, description, iconPath } = req.body;
+            const { level, xp, description } = req.body;
+
+            if (!(req as any)?.file)
+                return res.status(400).json({ error: 'Lack of icon' })
+
+            const fileName: string = (req as any).file.filename;
+            const fullPath: string = `uploads/level-icons/${fileName}`;
 
             const data: any = {
-                level, xp, description, iconPath
+                level, xp, description, iconPath: fullPath
             };
 
             const result: any = await CreateLevelHandler(data);
@@ -41,7 +47,9 @@ export default class LevelController {
 
     async getLevels (req: Request, res: Response): Promise<Response> {
         try {
-            const result: any = await GetLevelsHandler(); //truyền phân trang
+            const { page, perPage } = req.query;
+
+            const result: any = await GetLevelsHandler(page, perPage); 
 
             return res.status(result.statusCode).json({ result })
         }
@@ -50,9 +58,15 @@ export default class LevelController {
         }
     }
 
-    async updateLevel (req: Request<GetLevelByIdRequest, any, UpdateLevelRequest>, res: Response): Promise<Response> {
+    async updateLevel (req: Request<any, any, UpdateLevelRequest>, res: Response): Promise<Response> {
         try {
             const { levelId } = req.params;
+
+            if ((req as any)?.file) {
+                const fileName: string = (req as any).file.filename;
+                const fullPath: string = `uploads/level-icons/${fileName}`;
+                req.body.iconPath = fullPath;
+            }
 
             const result: any = await UpdateLevelHandler(levelId, req.body);
 

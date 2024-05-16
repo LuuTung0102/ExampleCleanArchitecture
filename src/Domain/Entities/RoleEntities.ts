@@ -1,25 +1,25 @@
 // import { BaseEntities } from "./BaseEntites";
 
 import mongoose from "mongoose";
-import { BaseSchema } from "./BaseEntities";
+import {BaseSchema} from "./BaseEntities";
 
 export const Role = new mongoose.Schema({
-  name: {
-    type: String,
-  },
-  description: {
-    type: String,
-  },
-  isAdmin: {
-    type: Boolean,
-  },
-  listClaim: {
-    type: Array<String>,
-  },
+    name: {
+        type: String,
+    },
+    description: {
+        type: String,
+    },
+    isAdmin: {
+        type: Boolean,
+    },
+    listClaim: {
+        type: Array<String>,
+    },
 })
 const RoleWithBaseSchema = new mongoose.Schema({
-  ...Role.obj,
-  ...BaseSchema.obj
+    ...Role.obj,
+    ...BaseSchema.obj
 })
 export const RoleWithBase = mongoose.model("RoleWithBase", RoleWithBaseSchema, "userroles");
 // class Role {

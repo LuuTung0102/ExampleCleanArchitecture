@@ -1,4 +1,5 @@
 import { BaseResponse } from './../../../Common/Model/Response/BaseResponse';
+// @ts-ignore
 export class LoginResponse extends BaseResponse {
     private data: {
         accessToken: string;

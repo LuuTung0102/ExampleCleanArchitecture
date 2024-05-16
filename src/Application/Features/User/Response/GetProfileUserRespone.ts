@@ -1,5 +1,6 @@
 import { BaseResponse } from "../../../Common/Model/Response/BaseResponse";
 
+// @ts-ignore
 export class GetProfileUserResponse extends BaseResponse {
   private data: {
     email: string;

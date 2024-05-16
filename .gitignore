@@ -187,3 +187,11 @@ dist
 .vscode/
 node_modules
 data/.vscode/
+
+.idea/
+
+bun.lockb
+
+tsconfig.json
+
+datasample

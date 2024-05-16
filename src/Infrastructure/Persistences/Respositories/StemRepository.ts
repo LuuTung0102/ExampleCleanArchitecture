@@ -6,7 +6,7 @@ import {StemWithBase} from "../../../Domain/Entities/StemEntites";
 class StemRepository implements IStemRepository {
     async createStem(stemData: any, session: ClientSession): Promise<typeof StemWithBase> {
         try {
-            const steam: any = await StemWithBase.create([{
+            const stem: any = await StemWithBase.create([{
                 name: stemData.name,
                 description: stemData.description,
                 stemCode: stemData.stemCode,
@@ -21,9 +21,7 @@ class StemRepository implements IStemRepository {
             }], {
                 session,
             })
-            return steam[0];
-
-
+            return stem;
         } catch (error: any) {
             throw new Error(
                 "Error at createStem in StemRepository: " + error.message
@@ -80,8 +78,8 @@ class StemRepository implements IStemRepository {
         Promise<void> {
         try {
             const _id = new mongoose.Types.ObjectId(stemId);
-            console.log(_id)
-            console.log("StemData", stemData)
+            // console.log(_id)
+            // console.log("StemData", stemData)
 
             const stem
                 :

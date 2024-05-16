@@ -41,14 +41,14 @@ export async function CreateStemHandle(data: any): Promise<CreateStemResponse | 
         }
 
         const result = await unitOfWork.stemRepository.createStem(
-            createStemData,
-            session
+            createStemData, //stemData
+            session // session
         )
         await unitOfWork.commitTransaction()
         // console.log("Created")
 
         return new CreateStemResponse(
-            "Successful",
+            "Create successful",
             StatusCodeEnums.OK_200,
             result
         );

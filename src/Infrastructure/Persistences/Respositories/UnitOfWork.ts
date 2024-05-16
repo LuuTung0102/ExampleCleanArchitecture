@@ -4,12 +4,15 @@ import RoleRepository from "./RoleRepository";
 import SessionRepository from "./SessionRepository";
 import UserRepository from "./UserRepository";
 import StemRepository from "./StemRepository";
+import CategoryRepository from "./CategoryRepository";
 
 export class UnitOfWork extends BaseUnitOfWork implements IUnitOfWork {
     userRepository: UserRepository;
     sessionRepository: SessionRepository;
     roleRepository: RoleRepository;
     stemRepository: StemRepository;
+    categoryRepository: CategoryRepository;
+
 
     constructor() {
         super();
@@ -17,5 +20,6 @@ export class UnitOfWork extends BaseUnitOfWork implements IUnitOfWork {
         this.roleRepository = new RoleRepository();
         this.sessionRepository = new SessionRepository();
         this.stemRepository = new StemRepository();
+        this.categoryRepository = new CategoryRepository();
     }
 }

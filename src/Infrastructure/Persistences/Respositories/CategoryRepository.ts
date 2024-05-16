@@ -15,7 +15,7 @@ class CategoryRepository implements ICategoryRepository {
             throw new Error("Error at createCategory in CategoryRepository: " + error.message);
         }  
     }
-    getCategoryById(CategoryId: string, queryData: any): Promise<typeof CategoryWithBase | null> {
+    async getCategoryById(CategoryId: string, queryData: any): Promise<typeof CategoryWithBase | null> {
         try {
             const _id = new mongoose.Types.ObjectId(CategoryId);
             const category: any = CategoryWithBase.findOne({

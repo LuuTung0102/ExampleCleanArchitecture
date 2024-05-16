@@ -13,18 +13,37 @@ class UserRepositoryV2 implements IUserRepositoryV2 {
             const user: any = await UserWithBaseV2.create([{
                 fullname: userData.fullname,
                 password: hashedPassword,
-                role_id: userData.role_id,
+                // role_id: userData.role_id,
             }], {session});
+
+            console.log(user)
       
             return user[0];
         } catch(err: any) {
             throw new Error("Error at createUser in UserRepositoryV2: " + err.message);
         }
     }
-    getUserById(userId: string, queryData: any): Promise<typeof UserWithBaseV2>  {
-        throw new Error('Method not implemented.');
+
+    async updateUserById(userId: string, userData: any, session: mongoose.mongo.ClientSession) {
+        try {
+            const hashedPassword = await hashPassword(userData.password);
+
+            const query: any = {
+              _id: new mongoose.Types.ObjectId(userId)
+            };
+                    
+            const updateData: any = {
+                fullname: userData.fullname,
+                password: hashedPassword
+            };
+            
+            await UserWithBaseV2.updateOne(query, updateData, {session});
+        } catch(err: any) {
+            throw new Error("Error at createUser in UserRepositoryV2: " + err.message);
+        }
     }
-    updateUserById(userId: string, userData: any, session: mongoose.mongo.ClientSession) {
+
+    getUserById(userId: string, queryData: any): Promise<typeof UserWithBaseV2>  {
         throw new Error('Method not implemented.');
     }
     deleteUserById(userId: string, session: mongoose.mongo.ClientSession) {

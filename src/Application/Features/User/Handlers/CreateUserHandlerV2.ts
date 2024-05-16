@@ -4,7 +4,7 @@ import { CoreException } from "../../../Common/Exceptions/CoreException";
 import { IUnitOfWork } from "../../../Persistences/IRepositories/IUnitOfWork";
 import { CreateUserResponse } from "../Response/CreateUserResponse";
 
-export async function CreateUserHandlerV2(data: any): Promise<any> {
+export async function CreateUserHandlerV2(data: any): Promise<CreateUserResponse|CoreException> {
     const unitOfWork: IUnitOfWork = new UnitOfWork();
     try {
         const session = await unitOfWork.startTransaction();
@@ -20,11 +20,12 @@ export async function CreateUserHandlerV2(data: any): Promise<any> {
         const createUserRoleData: any = {
           fullname: fullname,
           password: password,
-          role_id: role._id
+        //   role_id: role._id
         };
         
         const result: any = await unitOfWork.userRepositoryV2.createUser(createUserRoleData, session);
-        console.log(result)
+        
+        await unitOfWork.commitTransaction();
 
         return new CreateUserResponse("Successful", StatusCodeEnums.OK_200, result);
     } catch(err: any) {

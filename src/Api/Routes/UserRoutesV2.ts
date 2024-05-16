@@ -15,5 +15,6 @@ const userController = new UserController();
 
 router.get("/", userController.index);
 router.post("/signup", userController.createUser);
+router.post("/update", userController.updateUser)
 
 module.exports = router;

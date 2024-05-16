@@ -18,11 +18,8 @@ export default class StemController {
         res: Response,
     ): Promise<Response> {
         try {
-            //TODO: Fix UserId
-            //const userId = (req as any).user.userId
-            const userId = "123"
             const data = {
-                ...req.body, userId
+                ...req.body
             }
             const result = await CreateStemHandle(data)
             return res.status(200).json(result);
@@ -36,7 +33,11 @@ export default class StemController {
         res: Response,
     ): Promise<Response> {
         try {
-            const result = await FindAllStemHandle()
+            const data = {
+                ...req.body
+            }
+
+            const result = await FindAllStemHandle(data)
             return res.status(200).json(result);
         } catch (error: any) {
             return res.status(400).json({message: error.message});
@@ -63,9 +64,6 @@ export default class StemController {
         res: Response,
     ): Promise<Response> {
         try {
-            //TODO: Fix UserId
-            // const userId = (req as any).user.userId
-            const userId = "123"
             const data = req.body
             const result = await UpdateStemHandle(data);
             return res.status(200).json(result);
@@ -79,12 +77,8 @@ export default class StemController {
         res: Response,
     ): Promise<Response> {
         try {
-            //TODO: Fix UserId
-            // const userId = (req as any).user.userId
-            const userId = "123"
             const data = {
                 ...req.body,
-                userId,
             }
             const result = await DeleteStemHandle(data)
             return res.status(200).json(result);

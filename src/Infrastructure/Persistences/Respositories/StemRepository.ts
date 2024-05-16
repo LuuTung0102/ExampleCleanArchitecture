@@ -56,12 +56,33 @@ class StemRepository implements IStemRepository {
         }
     }
 
-    async getAllStem(queryData: any): Promise<typeof StemWithBase[] | null> {
+    async getAllStem(queryData: any): Promise<any> {
         try {
-            const stems: typeof StemWithBase[] = await StemWithBase.find({
-                isDelete: queryData.isDelete
-            });
-            return stems;
+            const {
+                perPage,
+                page,
+                isDelete,
+                isActive
+            } = queryData
+
+            const totalStems: number = await StemWithBase.countDocuments({
+                isActive: isActive,
+                isDelete: isDelete
+            })
+            const totalPages = Math.ceil(totalStems / perPage)
+
+            const stems: any = await StemWithBase.find({
+                isActive: isActive,
+                isDelete: isDelete
+            })
+                .limit(perPage)
+                .skip((page - 1) * perPage);
+            return {
+                totalStems,
+                perPage,
+                currentPage: page,
+                stems
+            }
         } catch (error: any) {
             throw new Error("Error at getAllStem in StemRepository: " + error.message);
         }

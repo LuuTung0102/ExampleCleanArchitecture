@@ -13,10 +13,11 @@ export async function FindStemHandle(
         const session = await unitOfWork.startTransaction()
 
         const queryData = {
+            isActive: true,
             isDelete: false,
         }
 
-        const result:any = await unitOfWork.stemRepository.getStemById(
+        const result: any = await unitOfWork.stemRepository.getStemById(
             stemId,
             queryData
         )

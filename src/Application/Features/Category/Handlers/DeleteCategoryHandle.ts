@@ -10,23 +10,17 @@ export async function DeleteCategoryHandle(data: any): Promise<DeleteCategoryRes
         const session = await unitOfWork.startTransaction()
         const {categoryId, stems } = data;
 
-        if (stems.length === 0) {
-            const result: any = await unitOfWork.categoryRepository.deleteCategoryById(categoryId, session);
-            await unitOfWork.commitTransaction();
+        const result: any = await unitOfWork.categoryRepository.deleteCategoryById(categoryId, session);
+        await unitOfWork.commitTransaction();
 
-            return new DeleteCategoryResponse(
-                "Delete Successful",
-                StatusCodeEnums.OK_200,
-                result
-            );
-        } else {
-            throw new Error("Have stem left in category");
-        }
+        return new DeleteCategoryResponse(
+            "Delete Successful",
+            StatusCodeEnums.OK_200,
+            result
+        );
 
     } catch (error: any) {
         await unitOfWork.abortTransaction()
-        return new CoreException(
-            StatusCodeEnums.InternalServerError_500, error.message
-        )
+        return new CoreException(StatusCodeEnums.InternalServerError_500, error.message)
     }
 }

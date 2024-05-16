@@ -16,6 +16,7 @@ export default class CategoryController {
         res: Response): Promise<Response> {
             try {
                 const { userId, stems } = req.body;
+                if(!stems) return res.status(400).json("Invalid Stem")
                 const createCategoryData = { userId, stems };
         
                 const result = await CreateCategoryHandle(createCategoryData);
@@ -59,8 +60,8 @@ export default class CategoryController {
                 const {userId, stems, categoryId} = req.body;
                 // const categoryId = (req as any).category._id;
 
-                const data = {userId, stems};
-                const result = UpdateCategoryHandle(categoryId, data);
+                const data = {categoryId, userId, stems};
+                const result = UpdateCategoryHandle(data);
 
                 return res.status(200).json(result);
             } catch (error: any) {
@@ -73,7 +74,7 @@ export default class CategoryController {
         res: Response): Promise<Response> {
             try {
                 const {categoryId, stems} = req.body
-                const userId = (req as any).user.userId
+                // const userId = (req as any).user.userId
                 const data = {categoryId, stems}
                 const result = await DeleteCategoryHandle(data)
 

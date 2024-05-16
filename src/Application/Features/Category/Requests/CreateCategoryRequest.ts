@@ -1,9 +1,9 @@
 export class CreateCategoryRequest {
     userId: string;
     stems: [{
-        stemId: string;
-        name: string;
-        price: number;
+        stem: {
+            
+        }
     }];
     
     constructor(userId: string, stems: any) {

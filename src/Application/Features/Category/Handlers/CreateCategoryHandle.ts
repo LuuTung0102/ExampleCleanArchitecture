@@ -8,15 +8,9 @@ export async function CreateCategoryHandle(data: any): Promise<CreateCategoryRes
     const unitOfWork: IUnitOfWork = new UnitOfWork()
     try {
         const session = await unitOfWork.startTransaction()
-        const {
-            userId,
-            stems,
-        } = data
+        const { userId, stems } = data
 
-        const createCategoryData = {
-            userId,
-            stems,
-        }
+        const createCategoryData = { userId, stems }
 
         const result = await unitOfWork.categoryRepository.createCategory(
             createCategoryData,

@@ -4,22 +4,11 @@ import {BaseSchema} from "./BaseEntities";
 export const Category = new mongoose.Schema({
     userId: {
         type: String,
-        ref: 'User'
+        ref: 'users'
     },
     stems: [{
-        stemId: {
-            type: mongoose.Types.ObjectId,
-            ref: 'Stem',
-            default: null
-        },
-        name: {
-            type: String,
-            default: "",
-        },
-        price: {
-            type: Number,
-            default: 0,
-        }
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Stem'
     }],
 })
 

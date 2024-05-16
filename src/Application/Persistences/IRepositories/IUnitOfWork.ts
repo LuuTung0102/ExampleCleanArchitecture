@@ -8,5 +8,6 @@ export interface IUnitOfWork extends IBaseUnitOfWork{
     userRepository: UserRepository;
     sessionRepository: SessionRepository;
     roleRepository: RoleRepository;
+    
     historyRepository: HistoryRepository;
 }

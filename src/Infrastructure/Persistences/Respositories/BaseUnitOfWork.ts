@@ -3,12 +3,12 @@ import { IBaseUnitOfWork } from "../../../Application/Persistences/IRepositories
 require('dotenv').config();
 const URI = process.env.CONNECTION_STRING;
 const DBName = process.env.DATABASE_NAME;
+
 export class BaseUnitOfWork implements IBaseUnitOfWork {
     private session: ClientSession | null = null;
     constructor() {
         this.connect();
     }
-
     async connect() {
         try {
             await mongoose.connect(`${URI}`, {dbName: DBName})

@@ -112,25 +112,29 @@ export default class StemController {
                 buyDate,
                 xp
             } = req.body
-            const userId = (req as any).user.userId
 
-            const data = {
-                userId,
-                steamId,
-                name,
-                description,
-                imagePath,
-                stemCode,
-                qrCode,
-                manufacture,
-                price,
-                producer,
-                type,
-                youtubeUrl,
-                buyDate,
-                xp
-            }
-            const result = UpdateStemHandle(data);
+            //TODO: Fix UserId
+            // const userId = (req as any).user.userId
+            const userId = "123"
+
+            // const data = {
+            //     userId,
+            //     steamId,
+            //     name,
+            //     description,
+            //     imagePath,
+            //     stemCode,
+            //     qrCode,
+            //     manufacture,
+            //     price,
+            //     producer,
+            //     type,
+            //     youtubeUrl,
+            //     buyDate,
+            //     xp
+            // }
+            const data = req.body
+            const result = await UpdateStemHandle(data);
 
             return res.status(200).json(result);
         } catch (error: any) {
@@ -144,7 +148,9 @@ export default class StemController {
     ): Promise<Response> {
         try {
             const {stemId} = req.body
-            const userId = (req as any).user.userId
+            //TODO: Fix UserId
+            // const userId = (req as any).user.userId
+            const userId = "123"
             const data = {
                 userId,
                 stemId

@@ -80,16 +80,31 @@ class StemRepository implements IStemRepository {
         Promise<void> {
         try {
             const _id = new mongoose.Types.ObjectId(stemId);
+            console.log(_id)
+            console.log("StemData", stemData)
+
             const stem
                 :
-                any = StemWithBase.findByIdAndUpdate(
+                any = await StemWithBase.findByIdAndUpdate(
                 _id,
-                stemData,
                 {
-                    session
+                    name: stemData.name,
+                    description: stemData.description,
+                    stemCode: stemData.stemCode,
+                    qrCode: stemData.qrCode,
+                    producer: stemData.producer,
+                    manufacturer: stemData.manufacturer,
+                    price: stemData.price,
+                    imagePath: stemData.imagePath,
+                    youtubeUrl: stemData.youtubeUrl,
+                    xp: stemData.xp,
+                    buyDate: stemData.buyDate,
+                    isDelete: stemData.isDelete,
+                    isActive: stemData.isActive
                 }
-            );
-            return stem;
+            )
+            // console.log("Stem: ", stem)
+            // return stem;
         } catch
             (error: any) {
             throw new Error("Error at updateStemById in StemRepository: " + error.message);

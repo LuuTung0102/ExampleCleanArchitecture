@@ -5,26 +5,19 @@ import { CoreException } from '../../../Common/Exceptions/CoreException';
 import { UnitOfWork } from '../../../../Infrastructure/Persistences/Respositories/UnitOfWork';
 import { IUnitOfWork } from '../../../Persistences/IRepositories/IUnitOfWork';
 
-export async function findHistoryHandler(data: any): Promise<findHistoryResponse | CoreException> {
+export async function findHistoryHandler(historyId: string, data: any): Promise<findHistoryResponse | CoreException> {
 	const unitOfWork: IUnitOfWork = new UnitOfWork();
 
 	try {
 		const session = await unitOfWork.startTransaction();
-		const { 
-            historyId,
-        } = data;
 
-		const userQueryData: any = {
-			historyId,
-			isDelete: false,
-		};
-		const history: any = await unitOfWork.historyRepository.getHistoryById(userQueryData);
+		const history: any = await unitOfWork.historyRepository.getHistoryById(historyId,data);
         
-		if (history == null) {
-			return new CoreException(StatusCodeEnums.NotFound_404, 'Not found!');
+		if (!history) {
+			return new CoreException(StatusCodeEnums.NotFound_404, 'loi o handler, not found history');
 		}
 		await unitOfWork.commitTransaction();
-
+		var  temp = history
 		return new findHistoryResponse(
             'Founded History!', 
             StatusCodeEnums.OK_200,
@@ -33,7 +26,7 @@ export async function findHistoryHandler(data: any): Promise<findHistoryResponse
 
 	} catch (error: any) {
 		await unitOfWork.abortTransaction();
-		return new CoreException(StatusCodeEnums.InternalServerError_500, error.mesagge);
+		return new CoreException(StatusCodeEnums.InternalServerError_500, error.message);
 	}
 }
 

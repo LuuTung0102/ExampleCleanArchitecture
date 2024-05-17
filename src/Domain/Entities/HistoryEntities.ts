@@ -12,19 +12,23 @@ export const History = new mongoose.Schema({
     type: Types.ObjectId,
     validate: {
       validator: isValidObjectId,
+      ref: 'User', default: () => new mongoose.Types.ObjectId()
     }
   },
   stemId: {
     type: Types.ObjectId,
     validate: {
       validator: isValidObjectId,
+      ref: 'Stem', default: () => new mongoose.Types.ObjectId()
     }
   },
   stemName: {
     type: String,
+    default: 'default'
   },
   xp_gain_amount: {
     type: Number,
+    default: 0
   },
   xp_gain_date: {
     type: Date,
@@ -32,6 +36,7 @@ export const History = new mongoose.Schema({
   },
   stemImagePath: {
     type: String,
+    default: 'default/path/to/image.jpg'
   },
 });
 

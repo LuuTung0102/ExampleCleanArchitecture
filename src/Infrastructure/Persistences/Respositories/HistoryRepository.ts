@@ -40,17 +40,17 @@ class HistoryRepository  implements IHistoryRepository {
     }
   }
 
-  async getHistoryById(queryData: any): Promise<typeof HistoryWithBase> {
+  async getHistoryById(historyId: string, queryData: any): Promise<typeof HistoryWithBase> {
     try {
 
       const query : any = {
-        id: new mongoose.Types.ObjectId(queryData.historyId),
+        _id: new mongoose.Types.ObjectId(historyId),
         isDelete: queryData.isDelete,
       };
 
-      const history: typeof HistoryWithBase[] = await HistoryWithBase.find({query});
+      const history:  typeof HistoryWithBase[] = await HistoryWithBase.find(query);
 
-      return history[0];
+      return history[0];  
 
       } catch (error: any) {
         throw new Error("Error at getHistoryById in HistoryRepository: " + error.message);
@@ -59,8 +59,8 @@ class HistoryRepository  implements IHistoryRepository {
 
   async updateHistoryById(updateData: any, session: ClientSession): Promise<void> {
     try{
-      const id = new mongoose.Types.ObjectId(updateData.historyId);
-      const history: any = await HistoryWithBase.findByIdAndUpdate(id, {
+      const _id = new mongoose.Types.ObjectId(updateData.historyId);
+      const history: any = await HistoryWithBase.findByIdAndUpdate(_id, {
 
         userId: updateData.userId,
         stemId: updateData.stemId,
@@ -76,12 +76,10 @@ class HistoryRepository  implements IHistoryRepository {
     }
   }
 
-  async deleteHistoryById(historyId: string, session: ClientSession): Promise<void> {
+  async deleteHistoryById(historyId: string): Promise<void> {
      try {
-            const id = new mongoose.Types.ObjectId(historyId);
-            const history: any = HistoryWithBase.findByIdAndUpdate(id, {
-                isDelete: true,
-            }, {session});
+            const _id = new mongoose.Types.ObjectId(historyId);
+            const history: any = await HistoryWithBase.findOneAndDelete(_id);
 
             // return history;
         } catch (error: any) {

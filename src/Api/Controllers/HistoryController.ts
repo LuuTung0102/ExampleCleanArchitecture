@@ -23,7 +23,10 @@ export default class HistroyController {
 	async GetHistoryById(req: Request<any, any, findHistoryRequest>, res: Response): Promise<Response> {
 		try {
 			const historyId = req.params.id;
-			const result: any = await findHistoryHandler(historyId);
+			const queryData = {
+				// isDelete: false,
+			}	
+			const result: any = await findHistoryHandler(historyId,queryData);
 			return res.status(201).json(result);
 		} catch (error: any) {
 			return res.status(500).json({ message: 'Internal server error' });

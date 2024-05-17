@@ -4,7 +4,7 @@ import { UnitOfWork } from '../../../../Infrastructure/Persistences/Respositorie
 import { StatusCodeEnums } from '../../../../Domain/Enums/StatusCodeEnums';
 import { IUnitOfWork } from '../../../Persistences/IRepositories/IUnitOfWork';
 
-export async function createHistoryHandle(data: any): Promise<createHistoryResponse | CoreException> {
+export async function createHistoryHandler(data: any): Promise<createHistoryResponse | CoreException> {
     const unitOfWork: IUnitOfWork = new UnitOfWork()
     try {
         const session = await unitOfWork.startTransaction()

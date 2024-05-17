@@ -4,7 +4,7 @@ import { History, HistoryWithBase } from "../../../Domain/Entities/HistoryEntiti
 interface IHistoryRepository {
 
     createHistory(historyData: any, session: ClientSession): Promise<typeof HistoryWithBase>;
-    getHistoryById(historyId: string, queryData: any): Promise<typeof HistoryWithBase>;
+    getHistoryById(historyId: string, queryData: any,session: ClientSession): Promise<typeof HistoryWithBase | null>;
     updateHistoryById(historyId: string, updateData: any, session: ClientSession): Promise<void>;
     deleteHistoryById(historyId: string, session: ClientSession): Promise<void>;
 }

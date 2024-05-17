@@ -5,29 +5,22 @@ import { CoreException } from '../../../Common/Exceptions/CoreException';
 import { UnitOfWork } from '../../../../Infrastructure/Persistences/Respositories/UnitOfWork';
 import { IUnitOfWork } from '../../../Persistences/IRepositories/IUnitOfWork';
 
-export async function deleteHistoryHandler(data: any): Promise<deleteHistoryResponse | CoreException> {
+export async function deleteHistoryHandler(historyId: string): Promise<deleteHistoryResponse | CoreException> {
 	const unitOfWork: IUnitOfWork = new UnitOfWork();
 	try {
 		const session = await unitOfWork.startTransaction();
-		const { 
-            historyId,
-			stemName,
-			stemImagePath,
-        } = data;
 
 		const userQueryData: any = {
-			historyId,
 			isDelete: false,
-			isActive: true,
 		};
-		const history: any = await unitOfWork.historyRepository.getHistoryById(userQueryData);
+		const history: any = await unitOfWork.historyRepository.getHistoryById(historyId,userQueryData);
         
-		if (history == null) {
-			return new CoreException(StatusCodeEnums.NotFound_404, 'Not found!');
+		if (!history) {
+			return new CoreException(StatusCodeEnums.NotFound_404, 'Not found History!');
 		}
 		const QueryData = historyId;
 
-		const result: any = await unitOfWork.historyRepository.deleteHistoryById(QueryData, session);   
+		const result: any = await unitOfWork.historyRepository.deleteHistoryById(QueryData);   
 		await unitOfWork.commitTransaction();
 
 		return new deleteHistoryResponse(

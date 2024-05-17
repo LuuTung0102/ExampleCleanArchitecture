@@ -20,7 +20,7 @@ export async function updateHistoryHandler(data: any): Promise<updateHistoryResp
 			historyId,
 			isDelete: false,
 		};
-		const history: any = await unitOfWork.historyRepository.getHistoryById(userQueryData);
+		const history: any = await unitOfWork.historyRepository.getHistoryById(historyId,userQueryData);
         
 		if (history == null) {
 			return new CoreException(StatusCodeEnums.NotFound_404, 'Not found!');

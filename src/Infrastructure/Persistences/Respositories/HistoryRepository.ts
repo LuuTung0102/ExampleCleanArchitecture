@@ -57,19 +57,10 @@ class HistoryRepository  implements IHistoryRepository {
       }
   }
 
-  async updateHistoryById(updateData: any, session: ClientSession): Promise<void> {
+  async updateHistoryById(historyId: string, updateData: any): Promise<void> {
     try{
       const _id = new mongoose.Types.ObjectId(updateData.historyId);
-      const history: any = await HistoryWithBase.findByIdAndUpdate(_id, {
-
-        userId: updateData.userId,
-        stemId: updateData.stemId,
-        stemName: updateData.stemName,
-        xp_gain_amount: updateData.xp_gain_amount,
-        xp_gain_date: updateData.xp_gain_date,
-        stemImagePath: updateData.stemImagePath,
-
-      } ,{session}); 
+      const history: any = await HistoryWithBase.findByIdAndUpdate(_id,updateData);
 
     } catch (error: any){
       throw new Error("Error at updateHistoryById in HistoryRepository: " + error.message);

@@ -18,7 +18,7 @@ const historyController = new HistoryController();
 
 router.post("/history/create", historyController.CreateHistory);
 router.get("/history/find/:id", historyController.GetHistoryById);
-router.put("/history/update:id", historyController.UpdateHistoryById);
+router.put("/history/update/:id", historyController.UpdateHistoryById);
 router.delete("/history/delete/:id",historyController.DeleteUserById);
 
 module.exports = router;

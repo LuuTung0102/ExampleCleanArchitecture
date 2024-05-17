@@ -35,8 +35,8 @@ export default class HistroyController {
 	async UpdateHistoryById(req: Request<any, any, updateHistoryRequest>, res: Response): Promise<void> {
 		try {
             const historyId = req.params.id;
-			const historyData = req.body;
-			const result: any = await updateHistoryHandler(historyData);
+			const historyData ={ };
+			const result: any = await updateHistoryHandler(historyId,historyData);
 			res.status(result.statusCode).json(result);
 		} catch (error: any) {
 			res.status(500).json({ message: 'Internal server error' });

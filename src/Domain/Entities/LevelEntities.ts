@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import { BaseSchema } from './BaseEntities';
 
-//này done rùi
 export const Level = new mongoose.Schema({
     level: {
         type: Number,

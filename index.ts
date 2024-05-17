@@ -12,7 +12,7 @@ app.use(express.json());
 
 app.use("/api", roleRoute);
 app.use("/api", userRoute);
-app.use("/api/level", levelRoute); 
+app.use("/api", levelRoute); 
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 app.use('/uploads', express.static('uploads'));

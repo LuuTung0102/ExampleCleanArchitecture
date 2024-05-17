@@ -32,13 +32,21 @@ export async function UpdateStemHandle(
         const updateStemData = {...data}
         delete updateStemData.stemId
 
-        console.log("Update data", updateStemData)
+        // console.log("Update data", updateStemData)
 
         const result: any = await unitOfWork.stemRepository.updateStemById(
             stemId,
             updateStemData,
             session
         )
+        if (!result) {
+            return new CoreException(
+                StatusCodeEnums.NotFound_404, "Not found stem"
+            )
+        }
+
+        await unitOfWork.commitTransaction()
+
         return new UpdateStemResponse(
             "Sucess",
             StatusCodeEnums.OK_200,

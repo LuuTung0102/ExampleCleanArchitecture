@@ -24,6 +24,10 @@ export async function FindStemHandle(
 
         // console.log("Result: ", result)
 
+        if (!result) {
+            return new CoreException(StatusCodeEnums.NotFound_404, "Stem not found");
+        }
+
         return new FindStemResponse(
             "Success",
             StatusCodeEnums.OK_200,

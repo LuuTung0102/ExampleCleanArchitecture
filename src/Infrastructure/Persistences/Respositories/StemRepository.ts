@@ -79,7 +79,7 @@ class StemRepository implements IStemRepository {
                 .skip((page - 1) * perPage);
             return {
                 totalStems,
-                perPage,
+                totalPages,
                 currentPage: page,
                 stems
             }
@@ -100,12 +100,13 @@ class StemRepository implements IStemRepository {
         try {
             const _id = new mongoose.Types.ObjectId(stemId);
             // console.log(_id)
-            // console.log("StemData", stemData)
-
+            console.log("StemData", stemData)
             const stem
                 :
                 any = await StemWithBase.findByIdAndUpdate(
-                _id,
+                {
+                    _id: _id
+                },
                 {
                     name: stemData.name,
                     description: stemData.description,
@@ -120,10 +121,14 @@ class StemRepository implements IStemRepository {
                     buyDate: stemData.buyDate,
                     isDelete: stemData.isDelete,
                     isActive: stemData.isActive
+                },
+                {
+                    new: true,
+                    session
                 }
             )
             // console.log("Stem: ", stem)
-            // return stem;
+            return stem;
         } catch
             (error: any) {
             throw new Error("Error at updateStemById in StemRepository: " + error.message);

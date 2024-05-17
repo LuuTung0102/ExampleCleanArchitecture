@@ -23,7 +23,7 @@ export async function FindAllStemHandle(
             isActive: true,
             isDelete: false,
         }
-        const result: typeof StemWithBase[] | null = await unitOfWork.stemRepository.getAllStem(
+        const result: typeof StemWithBase[] = await unitOfWork.stemRepository.getAllStem(
             queryData
         )
 

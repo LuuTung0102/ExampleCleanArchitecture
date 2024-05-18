@@ -4,10 +4,9 @@ import { CoreException } from "../../../Common/Exceptions/CoreException";
 import { UnitOfWork } from "../../../../Infrastructure/Persistences/Respositories/UnitOfWork";
 import { IUnitOfWork } from "../../../Persistences/IRepositories/IUnitOfWork";
 
-export async function DeleteLeaderBoardHandler(data: any): Promise<DeleteLeaderBoardResponse|CoreException>{
+export async function DeleteLeaderBoardHandler(_id: string): Promise<DeleteLeaderBoardResponse|CoreException>{
    const unitOfWork: IUnitOfWork = new UnitOfWork();
     try {
-        const {_id} = data;
         const leaderBoardQueryData: any = {
             _id: _id,
             isDelete: false,

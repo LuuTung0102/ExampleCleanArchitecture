@@ -12,7 +12,9 @@ export async function CreateUserHandler(data: any): Promise<CreateUserResponse|C
   const unitOfWork: IUnitOfWork = new UnitOfWork();
   try {
     const session = await unitOfWork.startTransaction();
+    console.log(data);
     const {email, fullname, password, phoneNumber, username} = data;
+    console.log(email);
     const roleQueryData: any = {
         isDelete: false,
         isActive: true,
@@ -50,6 +52,7 @@ export async function CreateUserHandler(data: any): Promise<CreateUserResponse|C
       username: username,
       role_id: role._id
     };
+    console.log(createUserRoleData);
     const result: any = await unitOfWork.userRepository.createUser(createUserRoleData, session);
     const emailHash = await md5Encrypt(result.emailCode);
     const emailData = { 

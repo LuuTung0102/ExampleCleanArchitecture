@@ -1,5 +1,4 @@
 import mongoose, { Types } from "mongoose";
-import speakeasy from "speakeasy";
 import { BaseSchema } from "./BaseEntities";
 
 const isValidObjectId = (value: Types.ObjectId) => {

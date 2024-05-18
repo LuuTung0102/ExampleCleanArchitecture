@@ -8,7 +8,6 @@ export async function GetLeaderBoardHandler(_id: string): Promise<GetLeaderBoard
     try {
       const unitOfWork: IUnitOfWork = new UnitOfWork();
       await unitOfWork.startTransaction();
-     
       const queryData: any = {
         _id: _id,
         isDelete: false,

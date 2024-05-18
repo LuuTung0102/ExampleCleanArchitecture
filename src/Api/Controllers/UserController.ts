@@ -49,6 +49,7 @@ export default class UserController {
     // #swagger.tags = ["User"]
     try {
       const { email, fullname, password, phoneNumber, username } = req.body;
+      console.log(req);
       const data: any = {
         email: email,
         fullname: fullname,
@@ -56,6 +57,7 @@ export default class UserController {
         phoneNumber: phoneNumber,
         username: username,
       };
+      console.log(data);
       const result: any = await CreateUserHandler(data);
       if (result.error != undefined || result.error) {
         return res.status(result.statusCode).json({ error: result.error });

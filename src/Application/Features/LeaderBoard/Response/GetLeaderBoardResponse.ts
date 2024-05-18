@@ -4,8 +4,8 @@ import  { Types } from "mongoose";
 export class GetLeaderBoardResponse extends BaseResponse {
   private data: {
     _id: string;
-    createAt: Date;
-    updateAt: Date;
+    createTime: Date;
+    updateTime: Date;
     isActive: boolean;
     isDelete: boolean;
     userId: Types.ObjectId;
@@ -16,8 +16,8 @@ export class GetLeaderBoardResponse extends BaseResponse {
     statusCode: number,
     data: {
         _id: string;
-        createAt: Date;
-        updateAt: Date;
+        createTime: Date;
+        updateTime: Date;
         isActive: boolean;
         isDelete: boolean;
         userId: Types.ObjectId;
@@ -28,8 +28,8 @@ export class GetLeaderBoardResponse extends BaseResponse {
     super(message, statusCode, data, error);
     this.data = {
         _id: data._id,
-        createAt: data.createAt,
-        updateAt: data.updateAt,
+        createTime: data.createTime,
+        updateTime: data.updateTime,
         isActive: data.isActive,
         isDelete: data.isDelete,
         userId: data.userId,

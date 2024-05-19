@@ -33,6 +33,6 @@ export async function GetLevelByIdHandler(data: any): Promise<GetLevelByIdRespon
     }   
     catch (error: any){
         await unitOfWork.abortTransaction();
-        throw new Error (`Error occured at GetLevelByIdHandler: ${error.message}`)
+        return new CoreException(StatusCodeEnums.InternalServerError_500, `Error occured at GetLevelByIdHandler: ${error.message}`);
     }
 }

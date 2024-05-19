@@ -25,6 +25,6 @@ export async function UpdateLevelHandler(id: any, updateData: any): Promise<Crea
     }   
     catch (error: any){
         await unitOfWork.abortTransaction();
-        throw new Error (`Error occured at UpdateLevelHandler: ${error.message}`)
+        return new CoreException(StatusCodeEnums.InternalServerError_500, `Error occured at UpdateLevelHandler: ${error.message}`);
     }
 }

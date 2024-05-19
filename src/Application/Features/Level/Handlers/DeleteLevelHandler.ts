@@ -27,6 +27,6 @@ export async function DeleteLevelByIdHandler(data: any): Promise<DeleteLevelResp
     }   
     catch (error: any){
         await unitOfWork.abortTransaction();
-        throw new Error (`Error occured at CreateLevelHandler: ${error.message}`)
+        return new CoreException(StatusCodeEnums.InternalServerError_500, `Error occured at DeleteLevelHandler: ${error.message}`);
     }
 }

@@ -22,6 +22,6 @@ export async function GetLevelsHandler(page?: any, perPage?: any): Promise<GetLe
     }   
     catch (error: any){
         await unitOfWork.abortTransaction();
-        throw new Error (`Error occured at GetLevelsHandler: ${error.message}`)
+        return new CoreException(StatusCodeEnums.InternalServerError_500, `Error occured at GetLevelsHandler: ${error.message}`);
     }
 }

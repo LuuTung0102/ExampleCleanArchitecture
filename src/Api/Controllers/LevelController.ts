@@ -17,7 +17,7 @@ export default class LevelController {
                 return res.status(400).json({ error: 'Lack of icon' })
 
             const fileName: string = (req as any).file.filename;
-            const fullPath: string = `uploads/level-icons/${fileName}`;
+            const fullPath: string = `uploads${req.url}/${fileName}`;
 
             const data: any = {
                 level, xp, description, iconPath: fullPath
@@ -64,7 +64,7 @@ export default class LevelController {
 
             if ((req as any)?.file) {
                 const fileName: string = (req as any).file.filename;
-                const fullPath: string = `uploads/level-icons/${fileName}`;
+                const fullPath: string = `uploads${req.url}/${fileName}`;
                 req.body.iconPath = fullPath;
             }
 

@@ -2,6 +2,7 @@ import mongoose, { Types } from "mongoose";
 import speakeasy from "speakeasy";
 import { BaseSchema } from "./BaseEntities";
 
+// check ObjectId is valid or not 
 const isValidObjectId = (value: Types.ObjectId) => {
   return mongoose.Types.ObjectId.isValid(value);
 };

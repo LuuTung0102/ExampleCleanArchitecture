@@ -5,6 +5,7 @@ import SessionRepository from "./SessionRepository";
 import UserRepository from "./UserRepository";
 import StemRepository from "./StemRepository";
 import CategoryRepository from "./CategoryRepository";
+import UserRepositoryV2 from "./UserRepositoryV2";
 
 export class UnitOfWork extends BaseUnitOfWork implements IUnitOfWork {
     userRepository: UserRepository;
@@ -14,6 +15,7 @@ export class UnitOfWork extends BaseUnitOfWork implements IUnitOfWork {
     categoryRepository: CategoryRepository;
 
 
+    userRepositoryV2: UserRepositoryV2;
     constructor() {
         super();
         this.userRepository = new UserRepository();
@@ -21,5 +23,6 @@ export class UnitOfWork extends BaseUnitOfWork implements IUnitOfWork {
         this.sessionRepository = new SessionRepository();
         this.stemRepository = new StemRepository();
         this.categoryRepository = new CategoryRepository();
+        this.userRepositoryV2 = new UserRepositoryV2();
     }
 }

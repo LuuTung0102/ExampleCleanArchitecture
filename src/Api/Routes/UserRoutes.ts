@@ -19,11 +19,13 @@ declare global {
   }
 }
 
-
 const {authenticateToken, authorizationMiddleware} = require("../Middlewares/AuthMiddleware");
 import { upload} from "../Middlewares/upimage"; 
+
 const router = express.Router();
+
 const userController = new UserController();
+
 router.post("/user/login", userController.login);
 router.post("/user/register", userController.createUser);
 router.post("/user/verifyEmail", userController.verifyEmail);

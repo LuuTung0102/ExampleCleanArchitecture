@@ -11,7 +11,6 @@ export class BaseUnitOfWork implements IBaseUnitOfWork {
     constructor() {
         this.connect();
     }
-
     async connect() {
         try {
             //

@@ -9,25 +9,25 @@ import {hashPassword} from "../../../Application/Common/Helpers/passwordUtils";
 //   }
 class UserRepository implements IUserRepository {
 
-    async updateUserById(userId: string, userData: any, session: ClientSession) {
-        try {
-            const _id = new mongoose.Types.ObjectId(userId);
-            const user: any = await UserWithBase.findByIdAndUpdate(_id, {
-                fullname: userData.fullname,
-                email: userData.email,
-                username: userData.username,
-                password: userData.password,
-                phoneNumber: userData.phoneNumber,
-                emailCode: userData.emailCode,
-                role_id: userData.role_id,
-            }, {session});
-            const query: any = {
-                _id: new mongoose.Types.ObjectId(userId)
-            }
-            // await this.updateDocument(query, user);
-        } catch (error: any) {
-            throw new Error("Error at updateUserById in UserRepository: " + error.message);
-        }
+  async updateUserById(userId: string, userData: any, session: ClientSession) {
+    try {
+      const _id = new mongoose.Types.ObjectId(userId);
+      const user: any = await UserWithBase.findByIdAndUpdate( _id, {
+        fullname: userData.fullname,
+        email: userData.email,
+        username: userData.username,
+        password: userData.password,
+        phoneNumber: userData.phoneNumber,
+        emailCode: userData.emailCode,
+        role_id: userData.role_id,
+      }, {session});
+      const query: any = {
+        _id: new mongoose.Types.ObjectId(userId)
+      }
+      // await this.updateDocument(query, user);
+    } catch (error: any) {
+      throw new Error("Error at updateUserById in UserRepository: " + error.message);
+    }
 
     }
 
@@ -84,24 +84,38 @@ class UserRepository implements IUserRepository {
         try {
             const hashedPassword = await hashPassword(userData.password);
 
-            console.log("start create user");
-            const user: any = await UserWithBase.create([{
-                fullname: userData.fullname,
-                email: userData.email,
-                username: userData.username,
-                password: hashedPassword,
-                phoneNumber: userData.phoneNumber,
-                role_id: userData.role_id,
-            }], {session});
-
-            console.log("done create user");
-            return user[0];
-        } catch (error: any) {
-            throw new Error(
-                "Error at createUser in UserRepository: " + error.message
-            );
-        }
+      const user: any = await UserWithBase.create([{
+        fullname: userData.fullname,
+        email: userData.email,
+        username: userData.username,
+        password: hashedPassword,
+        phoneNumber: userData.phoneNumber,
+        role_id: userData.role_id,
+      }], {session});
+      
+      return user[0];
+      // const user: any = new UserWithBase({
+      //   fullname: userData.fullname,
+      //   email: userData.email,
+      //   username: userData.username,
+      //   password: userData.password,
+      //   phoneNumber: userData.phoneNumber,
+      //   role_id: userData.role_id,
+      //   // imageUser: null,
+      //   // emailConfirmed: false,
+      //   // phoneConfirmed: false,
+      //   // emailCode: "awjkdalskd",
+      //   // enable2FA: true,
+      //   // twoFASecret: "asdkajlkwdjalkw"
+      // });
+      // // const userWithBase: any = new UserWithBase(user);
+      // await this.insertDocuments(userWithBase);
+    } catch (error: any) {
+      throw new Error(
+        "Error at createUser in UserRepository: " + error.message
+      );
     }
+  }
 
     async getUserById(queryData: any): Promise<typeof UserWithBase> {
         try {

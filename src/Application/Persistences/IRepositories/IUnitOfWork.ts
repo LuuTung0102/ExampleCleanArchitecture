@@ -1,6 +1,7 @@
 import RoleRepository from "../../../Infrastructure/Persistences/Respositories/RoleRepository";
 import SessionRepository from "../../../Infrastructure/Persistences/Respositories/SessionRepository";
 import UserRepository from "../../../Infrastructure/Persistences/Respositories/UserRepository";
+import LeaderBoardRepository from "../../../Infrastructure/Persistences/Respositories/LeaderBoardRepository";
 import HistoryRepository from "../../../Infrastructure/Persistences/Respositories/HistoryRepository";
 
 import UserRepositoryV2 from "../../../Infrastructure/Persistences/Respositories/UserRepositoryV2";
@@ -14,6 +15,7 @@ export interface IUnitOfWork extends IBaseUnitOfWork{
     userRepository: UserRepository;
     sessionRepository: SessionRepository;
     roleRepository: RoleRepository;
+    leaderBoardRepository: LeaderBoardRepository;
     
     historyRepository: HistoryRepository;
     levelRepository: LevelRepository; //

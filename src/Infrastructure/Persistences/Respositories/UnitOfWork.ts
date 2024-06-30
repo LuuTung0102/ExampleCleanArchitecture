@@ -4,6 +4,7 @@ import LevelRepository from "./LevelRepository";
 import RoleRepository from "./RoleRepository";
 import SessionRepository from "./SessionRepository";
 import UserRepository from "./UserRepository";
+import LeaderBoardRepository from "./LeaderBoardRepository";
 import HistoryRepository from "./HistoryRepository";
 import StemRepository from "./StemRepository";
 import CategoryRepository from "./CategoryRepository";
@@ -13,6 +14,7 @@ export class UnitOfWork extends BaseUnitOfWork implements IUnitOfWork {
   userRepository: UserRepository;
   sessionRepository: SessionRepository;
   roleRepository: RoleRepository;
+    leaderBoardRepository: LeaderBoardRepository;
     historyRepository: HistoryRepository
   levelRepository: LevelRepository;
 
@@ -25,6 +27,7 @@ export class UnitOfWork extends BaseUnitOfWork implements IUnitOfWork {
         this.historyRepository = new HistoryRepository();
     this.userRepository = new UserRepository();
     this.roleRepository = new RoleRepository();
+        this.leaderBoardRepository = new LeaderBoardRepository();
     this.sessionRepository = new SessionRepository();
     this.levelRepository = new LevelRepository();
     this.stemRepository = new StemRepository();

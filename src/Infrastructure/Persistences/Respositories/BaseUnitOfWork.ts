@@ -14,7 +14,7 @@ export class BaseUnitOfWork implements IBaseUnitOfWork {
     async connect() {
         try {
             //
-            console.log("Connecting to database...");
+            // console.log("Connecting to database...");
 
             await mongoose.connect(`${URI}`, {dbName: DBName})
         } catch (error: any) {

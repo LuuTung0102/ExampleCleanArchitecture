@@ -6,31 +6,6 @@ const isValidObjectId = (value: Types.ObjectId) => {
 };
 
 export const Stem = new mongoose.Schema({
-    //createAt
-    createAt: {
-        type: Date,
-        default: new Date()
-    },
-
-    //updateAt
-    updateAt: {
-        type: Date,
-        default: new Date()
-    },
-
-    //isActive
-    isActive: {
-        type: Boolean,
-        default: true
-    },
-
-
-    //isDelete
-    isDelete: {
-        type: Boolean,
-        default: false
-    },
-
     //name
     name: {
         type: String

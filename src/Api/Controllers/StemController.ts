@@ -18,47 +18,14 @@ export default class StemController {
         res: Response,
     ): Promise<Response> {
         try {
-            const {
-                name,
-                description,
-                imagePath,
-                stemCode,
-                qrCode,
-                manufacture,
-                price,
-                producer,
-                type,
-                youtubeUrl,
-                buyDate,
-                xp
-            } = req.body
-
-            //TODO: Fix UserId
-            //const userId = (req as any).user.userId
-            const userId = "123"
             const data = {
-                userId,
-                name,
-                description,
-                imagePath,
-                stemCode,
-                qrCode,
-                manufacture,
-                price,
-                producer,
-                type,
-                youtubeUrl,
-                buyDate,
-                xp
+                ...req.body
             }
-
             const result = await CreateStemHandle(data)
-
             return res.status(200).json(result);
         } catch (error: any) {
             return res.status(400).json({message: error.message});
         }
-
     }
 
     async findAllStem(
@@ -66,7 +33,11 @@ export default class StemController {
         res: Response,
     ): Promise<Response> {
         try {
-            const result = await FindAllStemHandle()
+            const data = {
+                ...req.body
+            }
+
+            const result = await FindAllStemHandle(data)
             return res.status(200).json(result);
         } catch (error: any) {
             return res.status(400).json({message: error.message});
@@ -78,14 +49,10 @@ export default class StemController {
         res: Response,
     ): Promise<Response> {
         try {
-            const {stemId} = req.body
             const data = {
-                stemId
+                ...req.body
             }
-            const result = await FindStemHandle(
-                data
-            )
-
+            const result = await FindStemHandle(data)
             return res.status(200).json(result);
         } catch (error: any) {
             return res.status(400).json({message: error.message});
@@ -97,41 +64,8 @@ export default class StemController {
         res: Response,
     ): Promise<Response> {
         try {
-            const {
-                steamId,
-                name,
-                description,
-                imagePath,
-                stemCode,
-                qrCode,
-                manufacture,
-                price,
-                producer,
-                type,
-                youtubeUrl,
-                buyDate,
-                xp
-            } = req.body
-            const userId = (req as any).user.userId
-
-            const data = {
-                userId,
-                steamId,
-                name,
-                description,
-                imagePath,
-                stemCode,
-                qrCode,
-                manufacture,
-                price,
-                producer,
-                type,
-                youtubeUrl,
-                buyDate,
-                xp
-            }
-            const result = UpdateStemHandle(data);
-
+            const data = req.body
+            const result = await UpdateStemHandle(data);
             return res.status(200).json(result);
         } catch (error: any) {
             return res.status(400).json({message: error.message});
@@ -143,16 +77,10 @@ export default class StemController {
         res: Response,
     ): Promise<Response> {
         try {
-            const {stemId} = req.body
-            const userId = (req as any).user.userId
             const data = {
-                userId,
-                stemId
+                ...req.body,
             }
-            const result = await DeleteStemHandle(
-                data
-            )
-
+            const result = await DeleteStemHandle(data)
             return res.status(200).json(result);
         } catch (error: any) {
             return res.status(400).json({message: error.message});

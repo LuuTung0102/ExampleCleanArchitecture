@@ -18,6 +18,8 @@ export async function DeleteStemHandle(
             session
         ) // Just change isDelete to True -> Not delete record.
 
+        // console.log("Result", result)
+
         await unitOfWork.commitTransaction()
 
         return new DeleteStemResponse(

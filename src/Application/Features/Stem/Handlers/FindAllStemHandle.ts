@@ -5,13 +5,25 @@ import {UnitOfWork} from "../../../../Infrastructure/Persistences/Respositories/
 import {StatusCodeEnums} from "../../../../Domain/Enums/StatusCodeEnums";
 import {StemWithBase} from "../../../../Domain/Entities/StemEntites";
 
-export async function FindAllStemHandle(): Promise<FindAllStemResponse | CoreException> {
+export async function FindAllStemHandle(
+    data: any
+): Promise<FindAllStemResponse | CoreException> {
     const unitOfWork: IUnitOfWork = new UnitOfWork()
     try {
+        //default pagination.
+        const {
+            perPage = 8,
+            page = 1
+        } = data
+
+
         const queryData = {
+            perPage,
+            page,
+            isActive: true,
             isDelete: false,
         }
-        const result:typeof StemWithBase[] | null= await unitOfWork.stemRepository.getAllStem(
+        const result: typeof StemWithBase[] = await unitOfWork.stemRepository.getAllStem(
             queryData
         )
 

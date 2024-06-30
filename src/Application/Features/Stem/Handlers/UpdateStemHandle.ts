@@ -11,42 +11,42 @@ export async function UpdateStemHandle(
     try {
         const {
             stemId,
-            userId,
-            name,
-            description,
-            imagePath,
-            stemCode,
-            qrCode,
-            manufacture,
-            price,
-            producer,
-            type,
-            youtubeUrl,
-            buyDate,
-            xp
+            // userId,
+            // name,
+            // description,
+            // imagePath,
+            // stemCode,
+            // qrCode,
+            // manufacture,
+            // price,
+            // producer,
+            // type,
+            // youtubeUrl,
+            // buyDate,
+            // xp
         } = data
         const session = await unitOfWork.startTransaction()
 
-        const updateStemData = {
-            name,
-            description,
-            imagePath,
-            stemCode,
-            qrCode,
-            manufacture,
-            price,
-            producer,
-            type,
-            youtubeUrl,
-            buyDate,
-            xp
-        }
+        console.log("Update")
+
+        const updateStemData = {...data}
+        delete updateStemData.stemId
+
+        // console.log("Update data", updateStemData)
 
         const result: any = await unitOfWork.stemRepository.updateStemById(
             stemId,
             updateStemData,
             session
         )
+        if (!result) {
+            return new CoreException(
+                StatusCodeEnums.NotFound_404, "Not found stem"
+            )
+        }
+
+        await unitOfWork.commitTransaction()
+
         return new UpdateStemResponse(
             "Sucess",
             StatusCodeEnums.OK_200,

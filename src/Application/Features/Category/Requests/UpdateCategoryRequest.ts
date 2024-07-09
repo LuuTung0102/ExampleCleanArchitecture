@@ -1,10 +1,8 @@
 export class UpdateCategoryRequest {
-    categoryId: string
+    categoryId: string;
     userId: string;
     stems: [{
         stemId: string;
-        name: string;
-        price: number;
     }];
     
     constructor(categoryId: string, userId: string, stems: any) {

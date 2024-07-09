@@ -4,7 +4,7 @@ import {IUnitOfWork} from "../../../Persistences/IRepositories/IUnitOfWork";
 import {UnitOfWork} from "../../../../Infrastructure/Persistences/Respositories/UnitOfWork";
 import {StatusCodeEnums} from "../../../../Domain/Enums/StatusCodeEnums";
 
-export async function UpdateCategoryHandle(CategoryData: any): Promise<UpdateCategoryResponse | CoreException> {
+export async function UpdateCategoryHandler(CategoryData: any): Promise<UpdateCategoryResponse | CoreException> {
     const unitOfWork: IUnitOfWork = new UnitOfWork()
     try {
         const session = await unitOfWork.startTransaction()
@@ -17,6 +17,11 @@ export async function UpdateCategoryHandle(CategoryData: any): Promise<UpdateCat
             updateCategoryData,
             session,
         )
+        if (!result) {
+            return new CoreException(
+                StatusCodeEnums.NotFound_404, "Not found stem"
+            )
+        }
         await unitOfWork.commitTransaction()
 
         return new UpdateCategoryResponse(

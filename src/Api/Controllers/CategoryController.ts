@@ -1,14 +1,14 @@
 import { Request, Response, query } from "express";
 import { CreateCategoryRequest } from "../../Application/Features/Category/Requests/CreateCategoryRequest";
-import { CreateCategoryHandle } from "../../Application/Features/Category/Handlers/CreateCategoryHandle";
+import { CreateCategoryHandler } from "../../Application/Features/Category/Handlers/CreateCategoryHandler";
 import { GetCategoryRequest } from "../../Application/Features/Category/Requests/GetCategoryRequest";
-import { GetCategoryHandle } from "../../Application/Features/Category/Handlers/GetCategoryHandle";
+import { GetCategoryHandler } from "../../Application/Features/Category/Handlers/GetCategoryHandler";
 import { GetAllCategoryRequest } from "../../Application/Features/Category/Requests/GetAllCategoryRequest";
-import { GetAllCategoryHandle } from "../../Application/Features/Category/Handlers/GetAllCategoryHandle";
+import { GetAllCategoryHandler } from "../../Application/Features/Category/Handlers/GetAllCategoryHandler";
 import { UpdateCategoryRequest } from "../../Application/Features/Category/Requests/UpdateCategoryRequest";
-import { UpdateCategoryHandle } from "../../Application/Features/Category/Handlers/UpdateCategoryHandle";
+import { UpdateCategoryHandler } from "../../Application/Features/Category/Handlers/UpdateCategoryHandler";
 import { DeleteCategoryRequest } from "../../Application/Features/Category/Requests/DeleteCategoryRequest";
-import { DeleteCategoryHandle } from "../../Application/Features/Category/Handlers/DeleteCategoryHandle";
+import { DeleteCategoryHandler } from "../../Application/Features/Category/Handlers/DeleteCategoryHandler";
 
 export default class CategoryController {
     async createCategory(
@@ -19,7 +19,7 @@ export default class CategoryController {
                 if(!stems) return res.status(400).json("Invalid Stem")
                 const createCategoryData = { userId, stems };
         
-                const result = await CreateCategoryHandle(createCategoryData);
+                const result = await CreateCategoryHandler(createCategoryData);
         
                 return res.status(200).json(result);
             } catch (error: any) {
@@ -34,7 +34,7 @@ export default class CategoryController {
             try {
                 const {categoryId} = req.body
             const data = {categoryId}
-            const result = await GetCategoryHandle(data)
+            const result = await GetCategoryHandler(data)
 
             return res.status(200).json(result);
             } catch (error: any) {
@@ -46,7 +46,7 @@ export default class CategoryController {
         req: Request<any, any, GetAllCategoryRequest>,
         res: Response): Promise<Response> {
             try {
-                const result = await GetAllCategoryHandle()
+                const result = await GetAllCategoryHandler()
                 return res.status(200).json(result);
             } catch (error: any) {
                 return res.status(500).json({message: error.message});
@@ -57,11 +57,10 @@ export default class CategoryController {
         req: Request<any, any, UpdateCategoryRequest>,
         res: Response): Promise<Response> {
             try {
-                const {userId, stems, categoryId} = req.body;
-                // const categoryId = (req as any).category._id;
-
+                const {categoryId, userId, stems} = req.body;
+                
                 const data = {categoryId, userId, stems};
-                const result = UpdateCategoryHandle(data);
+                const result = UpdateCategoryHandler(data);
 
                 return res.status(200).json(result);
             } catch (error: any) {
@@ -76,7 +75,7 @@ export default class CategoryController {
                 const {categoryId, stems} = req.body
                 // const userId = (req as any).user.userId
                 const data = {categoryId, stems}
-                const result = await DeleteCategoryHandle(data)
+                const result = await DeleteCategoryHandler(data)
 
             return res.status(200).json(result);
             } catch (error: any) {

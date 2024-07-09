@@ -1,29 +1,24 @@
 import {CoreException} from "../../../Common/Exceptions/CoreException";
-import { GetAllCategoryResponse } from "../Responses/GetAllCategoryResponse";
+import { CreateCategoryResponse } from "../Responses/CreateCategoryResponse";
 import {IUnitOfWork} from "../../../Persistences/IRepositories/IUnitOfWork";
 import {UnitOfWork} from "../../../../Infrastructure/Persistences/Respositories/UnitOfWork";
 import {StatusCodeEnums} from "../../../../Domain/Enums/StatusCodeEnums";
-import { CategoryWithBase } from "../../../../Domain/Entities/CategoryEntites";
 
-export async function GetAllCategoryHandle(): Promise<GetAllCategoryResponse | CoreException> {
+export async function CreateCategoryHandler(data: any): Promise<CreateCategoryResponse | CoreException> {
     const unitOfWork: IUnitOfWork = new UnitOfWork()
     try {
-        // const session = await unitOfWork.startTransaction()
+        const session = await unitOfWork.startTransaction()
+        const { userId, stems } = data
 
-        const queryData = {
-            isDelete: false,
-        }
+        const createCategoryData = { userId, stems }
 
-        const result:typeof CategoryWithBase[] | null = await unitOfWork.categoryRepository.getAllCategory(
-            queryData,
+        const result: any = await unitOfWork.categoryRepository.createCategory(
+            createCategoryData,
+            session,
         )
         await unitOfWork.commitTransaction()
 
-        if (!result) {
-            return new CoreException(StatusCodeEnums.InternalServerError_500, "Category is empty");
-        }
-
-        return new GetAllCategoryResponse(
+        return new CreateCategoryResponse(
             "Successful",
             StatusCodeEnums.OK_200,
             result

@@ -4,7 +4,7 @@ import {IUnitOfWork} from "../../../Persistences/IRepositories/IUnitOfWork";
 import {UnitOfWork} from "../../../../Infrastructure/Persistences/Respositories/UnitOfWork";
 import {StatusCodeEnums} from "../../../../Domain/Enums/StatusCodeEnums";
 
-export async function GetCategoryHandle(data: any): Promise<GetCategoryResponse | CoreException> {
+export async function GetCategoryHandler(data: any): Promise<GetCategoryResponse | CoreException> {
     const unitOfWork: IUnitOfWork = new UnitOfWork()
     try {
         // const session = await unitOfWork.startTransaction()
@@ -12,9 +12,10 @@ export async function GetCategoryHandle(data: any): Promise<GetCategoryResponse 
 
         const queryData = {
             isDelete: false,
+            isActive: true,
         }
 
-        const result:any = await unitOfWork.categoryRepository.getCategoryById(
+        const result: any = await unitOfWork.categoryRepository.getCategoryById(
             categoryId,
             queryData,
         )

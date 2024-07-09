@@ -6,10 +6,10 @@ export const Category = new mongoose.Schema({
         type: String,
         ref: 'users'
     },
-    stems: [{
-            type: mongoose.Schema.Types.ObjectId,
+    stems: {
+            type: Array<mongoose.Schema.Types.ObjectId>,
             ref: 'Stem'
-    }],
+    },
 })
 
 

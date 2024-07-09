@@ -18,7 +18,7 @@ export interface IUnitOfWork extends IBaseUnitOfWork{
     leaderBoardRepository: LeaderBoardRepository;
     
     historyRepository: HistoryRepository;
-    levelRepository: LevelRepository; //
+    levelRepository: LevelRepository;
     stemRepository: StemRepository;
     categoryRepository: CategoryRepository;
 

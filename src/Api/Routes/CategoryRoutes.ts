@@ -2,7 +2,6 @@ import {Category} from "../../Domain/Entities/CategoryEntites";
 import express from 'express';
 import CategoryController from "../Controllers/CategoryController";
 
-
 declare global {
     namespace Express {
         interface Request {

@@ -4,11 +4,11 @@ import {IUnitOfWork} from "../../../Persistences/IRepositories/IUnitOfWork";
 import {UnitOfWork} from "../../../../Infrastructure/Persistences/Respositories/UnitOfWork";
 import {StatusCodeEnums} from "../../../../Domain/Enums/StatusCodeEnums";
 
-export async function DeleteCategoryHandle(data: any): Promise<DeleteCategoryResponse | CoreException> {
+export async function DeleteCategoryHandler(data: any): Promise<DeleteCategoryResponse | CoreException> {
     const unitOfWork: IUnitOfWork = new UnitOfWork()
     try {
         const session = await unitOfWork.startTransaction()
-        const {categoryId, stems } = data;
+        const {categoryId} = data;
 
         const result: any = await unitOfWork.categoryRepository.deleteCategoryById(categoryId, session);
         await unitOfWork.commitTransaction();
